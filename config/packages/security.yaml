@@ -19,6 +19,8 @@ security:
             form_login:
                 login_path: app_login
                 check_path: app_login
+            logout:
+                path: app_logout
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -32,6 +34,18 @@ security:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/, roles: PUBLIC_ACCESS}
+    role_hierarchy:
+        ROLE_ADMIN:
+            - ROLE_USER
+            - ROLE_LOCATION_EDIT
+            - ROLE_MEASUREMENT_EDIT
+        ROLE_MANAGER:
+            - ROLE_USER
+            - ROLE_LOCATION_SHOW
+            - ROLE_MEASUREMENT_SHOW
+        ROLE_USER:
+            - ROLE_LOCATION_INDEX
+            - ROLE_MEASUREMENT_INDEX
 
 when@test:
     security:
