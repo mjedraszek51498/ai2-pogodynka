@@ -1,0 +1,48 @@
+App\Entity\Measurement:
+    properties:
+        date:
+            - NotBlank:
+                message: 'Date should not be blank.'
+                groups: ['create', 'edit']
+
+        celsius:
+            - NotBlank:
+                message: 'Temperature should not be blank.'
+                groups: ['create', 'edit']
+            - Range:
+                min: -100
+                max: 100
+                notInRangeMessage: 'Temperature must be between {{ min }} and {{ max }} degrees.'
+                groups: ['create', 'edit']
+
+        humidity:
+            - NotBlank:
+                message: 'Humidity should not be blank.'
+                groups: ['create', 'edit']
+            - Range:
+                min: 0
+                max: 100
+                notInRangeMessage: 'Humidity must be between {{ min }}% and {{ max }}%.'
+                groups: ['create', 'edit']
+
+        pressure:
+            - NotBlank:
+                message: 'Pressure should not be blank.'
+                groups: ['create', 'edit']
+            - Range:
+                min: 300
+                max: 1100
+                notInRangeMessage: 'Pressure must be between {{ min }} hPa and {{ max }} hPa.'
+                groups: ['create', 'edit']
+
+        description:
+            - Length:
+                max: 255
+                maxMessage: 'Description cannot be longer than {{ limit }} characters.'
+                groups: ['create', 'edit']
+
+        location:
+            - NotNull:
+                message: 'Location must be specified.'
+                groups: ['create', 'edit']
+
