@@ -9,6 +9,9 @@ use App\Repository\LocationRepository;
 
 class WeatherUtil
 {
+    public function __construct(private LocationRepository $locationRepository)
+    {
+    }
     /**
      * @return Measurement[]
      */
@@ -21,10 +24,10 @@ class WeatherUtil
     /**
      * @return Measurement[]
      */
-    public function getWeatherForCountryAndCity(string $country, string $city, LocationRepository $locationRepository): array
+    public function getWeatherForCountryAndCity(string $country, string $city): array
     {
 
-        $location = $locationRepository->findOneBy([
+        $location = $this->locationRepository->findOneBy([
             'country' => $country,
             'city' => $city,
         ]);
